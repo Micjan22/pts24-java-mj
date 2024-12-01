@@ -1,8 +1,10 @@
 
 package sk.uniba.fmph.dcs.stone_age;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
-public record CivilisationCard(ArrayList<ImmediateEffect> immediateEffect, ArrayList<EndOfGameEffect> endOfGameEffect) {
+
+public record CivilisationCard(Collection<ImmediateEffect> immediateEffect, Collection<EndOfGameEffect> endOfGameEffect) {
+
 
 }

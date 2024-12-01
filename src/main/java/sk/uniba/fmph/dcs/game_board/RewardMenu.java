@@ -16,7 +16,8 @@ public class RewardMenu implements InterfaceTakeReward {
     private final ArrayList<Player> allPlayers;
 
     public RewardMenu(final ArrayList<Player> players) {
-        allplayers = new ArrayList<>(players);
+        allPlayers = new ArrayList<>(players);
+
     }
 
 
@@ -70,7 +71,8 @@ public class RewardMenu implements InterfaceTakeReward {
     }
 
     public final String state() {
-        Map<String, String> state = Map.of("items", items.toString);
+        Map<String, String> state = Map.of("items", items.toString());
+
         return new JSONObject(state).toString();
     }
 
