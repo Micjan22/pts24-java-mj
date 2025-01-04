@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import sk.uniba.fmph.dcs.stone_age.ActionResult;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AllPlayersTakeReward implements EvaluateCivilisationCardImmediateEffect {
-    private final RewardMenu menu;
+    private final RewardMenuInterface menu;
     private static final int WOODNUMBER = 1;
 
     private static final int CLAYNUMBER = 2;
@@ -16,9 +17,9 @@ public class AllPlayersTakeReward implements EvaluateCivilisationCardImmediateEf
     private static final int TOOLNUMBER = 5;
     private static final int FIELDNUMBER = 6;
     private ArrayList<Integer> diceThrows;
-    private final Throw t;
+    private final ThrowInterface t;
 
-    public AllPlayersTakeReward(final RewardMenu menu, final Throw t) {
+    public AllPlayersTakeReward(final RewardMenuInterface menu, final ThrowInterface t) {
         this.menu = menu;
         diceThrows = new ArrayList<>();
         this.t = t;
@@ -53,4 +54,8 @@ public class AllPlayersTakeReward implements EvaluateCivilisationCardImmediateEf
         return ActionResult.ACTION_DONE_ALL_PLAYERS_TAKE_A_REWARD;
     }
 
+    @Override
+    public boolean tryToPerformEffect(final Player player, final Effect choice) {
+        return true;
+    }
 }

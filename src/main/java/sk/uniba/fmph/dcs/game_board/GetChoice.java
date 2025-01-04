@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import sk.uniba.fmph.dcs.stone_age.ActionResult;
@@ -20,4 +21,8 @@ public class GetChoice implements EvaluateCivilisationCardImmediateEffect {
         return ActionResult.ACTION_DONE;
     }
 
+    @Override
+    public boolean tryToPerformEffect(final Player player, final Effect choice) {
+        return choice.isResource();
+    }
 }

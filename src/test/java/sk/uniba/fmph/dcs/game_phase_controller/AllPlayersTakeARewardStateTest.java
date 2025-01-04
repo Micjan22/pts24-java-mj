@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_phase_controller;
 
 import org.junit.Test;

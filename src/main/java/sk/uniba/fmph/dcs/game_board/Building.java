@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import java.util.Collection;

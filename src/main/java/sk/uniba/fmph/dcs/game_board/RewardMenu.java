@@ -1,5 +1,6 @@
 package sk.uniba.fmph.dcs.game_board;
 
+import org.json.JSONObject;
 import sk.uniba.fmph.dcs.stone_age.Effect;
 import sk.uniba.fmph.dcs.stone_age.HasAction;
 import sk.uniba.fmph.dcs.stone_age.InterfaceTakeReward;
@@ -7,26 +8,22 @@ import sk.uniba.fmph.dcs.stone_age.PlayerOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import org.json.JSONObject;
 
-public class RewardMenu implements InterfaceTakeReward {
+public class RewardMenu implements InterfaceTakeReward, RewardMenuInterface {
     private ArrayList<Effect> items;
-    private Map<PlayerOrder, Player> players;
-    private final ArrayList<Player> allPlayers;
+    private final Map<PlayerOrder, Player> players;
 
     public RewardMenu(final ArrayList<Player> players) {
-        allPlayers = new ArrayList<>(players);
-
+        this.players = mapInitiate(players);
     }
 
     public final void initiate(final ArrayList<Effect> items) {
-        this.items = new ArrayList<>(items);
-        this.players = mapInitiate(allPlayers);
+        this.items = items;
     }
 
     private Map<PlayerOrder, Player> mapInitiate(final ArrayList<Player> players) {
         Map<PlayerOrder, Player> map = new HashMap<>();
-        for (Player p : players) {
+        for (Player p: players) {
             map.put(p.playerOrder(), p);
         }
         return map;
@@ -68,9 +65,11 @@ public class RewardMenu implements InterfaceTakeReward {
     }
 
     public final String state() {
+        if (items == null) {
+            return "";
+        }
         Map<String, String> state = Map.of("items", items.toString());
 
         return new JSONObject(state).toString();
     }
-
 }

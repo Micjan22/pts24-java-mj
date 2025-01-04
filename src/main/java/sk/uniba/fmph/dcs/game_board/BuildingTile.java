@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import org.json.JSONObject;
@@ -52,7 +53,7 @@ public final class BuildingTile implements InterfaceFigureLocationInternal {
 
     @Override
     public ActionResult makeAction(final Player player, final Collection<Effect> inputResources,
-            final Collection<Effect> outputResources) {
+                                   final Collection<Effect> outputResources) {
         if (tryToMakeAction(player).equals(HasAction.NO_ACTION_POSSIBLE)) {
             return ActionResult.FAILURE;
         }
@@ -103,7 +104,8 @@ public final class BuildingTile implements InterfaceFigureLocationInternal {
         return buildingStack.isEmpty();
     }
 
-    String state() {
+    @Override
+    public String state() {
         String buildingStateOrNull = "{}";
         if (!buildingStack.isEmpty()) {
             buildingStateOrNull = building.state();

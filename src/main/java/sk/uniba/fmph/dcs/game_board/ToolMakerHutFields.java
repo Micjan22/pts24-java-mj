@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import org.json.JSONObject;
@@ -53,11 +54,11 @@ public final class ToolMakerHutFields {
     }
 
     public boolean actionToolMaker(final Player player) {
-        if (toolMakerFigures.contains(player.playerOrder())) {
+        if (tryToMakeActionToolMaker(player)) {
             ArrayList<Effect> addTool = new ArrayList<>();
             addTool.add(Effect.TOOL);
             player.playerBoard().giveEffect(addTool);
-            toolMakerFigures.remove(player.playerOrder());
+            toolMakerFigures.clear();
             return true;
         }
         return false;
@@ -68,6 +69,17 @@ public final class ToolMakerHutFields {
             return false;
         }
         return toolMakerFigures.isEmpty();
+    }
+
+    public boolean tryToMakeActionToolMaker(final Player player) {
+        return toolMakerFigures.contains(player.playerOrder());
+    }
+
+    public boolean skipActionToolMaker(final Player player) {
+        if (tryToMakeActionToolMaker(player)) {
+            toolMakerFigures.clear();
+        }
+        return true;
     }
 
     public boolean placeOnHut(final Player player) {
@@ -81,10 +93,9 @@ public final class ToolMakerHutFields {
     }
 
     public boolean actionHut(final Player player) {
-        if (hutFigures.contains(player.playerOrder())) {
+        if (tryToMakeActionHut(player)) {
             player.playerBoard().giveFigures(1);
-            hutFigures.remove(player.playerOrder());
-            hutFigures.remove(player.playerOrder());
+            hutFigures.clear();
             return true;
         }
         return false;
@@ -97,6 +108,17 @@ public final class ToolMakerHutFields {
         return hutFigures.isEmpty();
     }
 
+    public boolean tryToMakeActionHut(final Player player) {
+        return hutFigures.contains(player.playerOrder());
+    }
+
+    public boolean skipActionHut(final Player player) {
+        if (tryToMakeActionHut(player)) {
+            hutFigures.clear();
+        }
+        return true;
+    }
+
     public boolean placeOnFields(final Player player) {
         if (canPlaceOnFields(player)) {
             fieldsFigures.add(player.playerOrder());
@@ -107,11 +129,11 @@ public final class ToolMakerHutFields {
     }
 
     public boolean actionFields(final Player player) {
-        if (fieldsFigures.contains(player.playerOrder())) {
+        if (tryToMakeActionFields(player)) {
             ArrayList<Effect> increaseAgricultureLevel = new ArrayList<>();
             increaseAgricultureLevel.add(Effect.FIELD);
             player.playerBoard().giveEffect(increaseAgricultureLevel);
-            fieldsFigures.remove(player.playerOrder());
+            fieldsFigures.clear();
             return true;
         }
         return false;
@@ -124,8 +146,22 @@ public final class ToolMakerHutFields {
         return fieldsFigures.isEmpty();
     }
 
+    public boolean tryToMakeActionFields(final Player player) {
+        return fieldsFigures.contains(player.playerOrder());
+    }
+
+    public boolean skipActionFields(final Player player) {
+        if (tryToMakeActionFields(player)) {
+            fieldsFigures.remove(player.playerOrder());
+        }
+        return true;
+    }
+
     public boolean newTurn() {
-        return toolMakerFigures.isEmpty() && hutFigures.isEmpty() && fieldsFigures.isEmpty();
+        toolMakerFigures.clear();
+        fieldsFigures.clear();
+        hutFigures.clear();
+        return false;
     }
 
     String state() {

@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.stone_age;
 
 public final class PlayerOrder {
@@ -57,3 +58,4 @@ public final class PlayerOrder {
         return "PlayerOrder [order=" + order + "]";
     }
 }
+

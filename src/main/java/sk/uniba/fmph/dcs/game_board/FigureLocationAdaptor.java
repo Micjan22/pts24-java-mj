@@ -45,7 +45,7 @@ public final class FigureLocationAdaptor implements InterfaceFigureLocation {
 
     @Override
     public ActionResult makeAction(final PlayerOrder player, final Collection<Effect> inputResources,
-            final Collection<Effect> outputResources) {
+                                   final Collection<Effect> outputResources) {
         Player p = adaptPlayerOrder(player);
         if (p == null) {
             return ActionResult.FAILURE;

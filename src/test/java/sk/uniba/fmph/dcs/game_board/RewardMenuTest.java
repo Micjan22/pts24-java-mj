@@ -11,63 +11,10 @@ import static org.junit.Assert.*;
 
 public class RewardMenuTest {
 
-    private class PlayerBoardMock implements InterfacePlayerBoardGameBoard {
-
-        @Override
-        public void giveEffect(Collection<Effect> stuff) {
-
-        }
-
-        @Override
-        public void giveEndOfGameEffect(Collection<EndOfGameEffect> stuff) {
-
-        }
-
-        @Override
-        public boolean takeResources(Collection<Effect> stuff) {
-            return false;
-        }
-
-        @Override
-        public boolean takeFigures(int count) {
-            return false;
-        }
-
-        @Override
-        public void giveFigures(int count) {
-
-        }
-
-        @Override
-        public boolean hasFigures(int count) {
-            return false;
-        }
-
-        @Override
-        public boolean hasSufficientTools(int goal) {
-            return false;
-        }
-
-        @Override
-        public OptionalInt useTool(int idx) {
-            return null;
-        }
-
-        @Override
-        public void takePoints(int points) {
-
-        }
-
-        @Override
-        public void givePoints(int points) {
-
-        }
-    }
-
     @Test
     public void testCalculation() {
-        PlayerOrder playerOrder1 = new PlayerOrder(0, 2);
-        PlayerOrder playerOrder2 = new PlayerOrder(1, 2);
+        PlayerOrder playerOrder1 = new PlayerOrder(0,2);
+        PlayerOrder playerOrder2 = new PlayerOrder(1,2);
         ArrayList<Player> players = new ArrayList<>();
         PlayerBoardMock boardMock = new PlayerBoardMock();
         Player player1 = new Player(playerOrder1, boardMock);
@@ -93,7 +40,7 @@ public class RewardMenuTest {
 
     @Test
     public void noPlayersTest() {
-        PlayerOrder playerOrder = new PlayerOrder(0, 0);
+        PlayerOrder playerOrder = new PlayerOrder(0,0);
         RewardMenu menu = new RewardMenu(new ArrayList<>());
         ArrayList<Effect> items = new ArrayList<>();
         items.add(Effect.WOOD);
@@ -105,7 +52,7 @@ public class RewardMenuTest {
 
     @Test
     public void noItemsTest() {
-        PlayerOrder playerOrder = new PlayerOrder(0, 0);
+        PlayerOrder playerOrder = new PlayerOrder(0,0);
         ArrayList<Player> players = new ArrayList<>();
         PlayerBoardMock boardMock = new PlayerBoardMock();
         Player player = new Player(playerOrder, boardMock);

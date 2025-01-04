@@ -1,12 +1,10 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 import java.util.OptionalInt;
-
-import org.apache.commons.collections4.CollectionUtils;
-
+import java.util.Map;
 import org.json.JSONObject;
 import sk.uniba.fmph.dcs.stone_age.Effect;
 
@@ -24,7 +22,14 @@ public final class SimpleBuilding implements Building {
     }
 
     public OptionalInt build(final Collection<Effect> resources) {
-        if (!CollectionUtils.isEqualCollection(this.requiredResources, resources)) {
+        ArrayList<Effect> resourcesCheck = new ArrayList<>(resources);
+        for (Effect effect: requiredResources) {
+            if (!resourcesCheck.contains(effect)) {
+                return OptionalInt.empty();
+            }
+            resourcesCheck.remove(effect);
+        }
+        if (!resourcesCheck.isEmpty()) {
             return OptionalInt.empty();
         }
 

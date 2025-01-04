@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.player_board;
 
 import org.json.JSONObject;
@@ -21,6 +22,10 @@ public final class TribeFedStatus {
     public TribeFedStatus(final PlayerResourcesAndFood playerResourcesAndFood, final PlayerFigures playerFigures) {
         this.playerResourcesAndFood = playerResourcesAndFood;
         this.playerFigures = playerFigures;
+    }
+
+    public int getFields() {
+        return fields;
     }
 
     public void addField() {

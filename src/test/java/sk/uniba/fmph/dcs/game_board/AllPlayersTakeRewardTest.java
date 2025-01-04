@@ -11,65 +11,47 @@ public class AllPlayersTakeRewardTest {
 
     @Test
     public void testCalculation() {
-        InterfacePlayerBoardGameBoard board = new InterfacePlayerBoardGameBoard() {
+
+        ThrowInterface throwMock = new ThrowInterface() {
             @Override
-            public void giveEffect(Collection<Effect> stuff) {
+            public ArrayList<Integer> throwDice(int dices) {
+                ArrayList<Integer> result = new ArrayList<>();
+                result.add(6);
+                return result;
+            }
+
+            @Override
+            public void setRolls(ArrayList<Integer> rolls) {
+
+            }
+        };
+
+        RewardMenuInterface rewardMenuMock = new RewardMenuInterface() {
+            @Override
+            public void initiate(ArrayList<Effect> items) {
 
             }
 
             @Override
-            public void giveEndOfGameEffect(Collection<EndOfGameEffect> stuff) {
-
-            }
-
-            @Override
-            public boolean takeResources(Collection<Effect> stuff) {
+            public boolean takeReward(PlayerOrder player, Effect reward) {
                 return false;
             }
 
             @Override
-            public boolean takeFigures(int count) {
-                return false;
-            }
-
-            @Override
-            public void giveFigures(int count) {
-
-            }
-
-            @Override
-            public boolean hasFigures(int count) {
-                return false;
-            }
-
-            @Override
-            public boolean hasSufficientTools(int goal) {
-                return false;
-            }
-
-            @Override
-            public OptionalInt useTool(int idx) {
+            public HasAction tryMakeAction(PlayerOrder player) {
                 return null;
             }
 
             @Override
-            public void takePoints(int points) {
-
-            }
-
-            @Override
-            public void givePoints(int points) {
-
+            public String state() {
+                return null;
             }
         };
-        RewardMenu menu = new RewardMenu(new ArrayList<>());
-        Throw t = new Throw(-1);
 
-        AllPlayersTakeReward a = new AllPlayersTakeReward(menu, t);
-
-        PlayerOrder playerOrder = new PlayerOrder(0, 0);
+        PlayerBoardMock board = new PlayerBoardMock();
+        AllPlayersTakeReward a = new AllPlayersTakeReward(rewardMenuMock, throwMock);
+        PlayerOrder playerOrder = new PlayerOrder(0,0);
         Player p = new Player(playerOrder, board);
         assertEquals(a.performEffect(p, null), ActionResult.ACTION_DONE_ALL_PLAYERS_TAKE_A_REWARD);
-
     }
 }

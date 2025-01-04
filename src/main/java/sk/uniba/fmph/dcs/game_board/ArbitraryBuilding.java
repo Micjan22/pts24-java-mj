@@ -35,7 +35,8 @@ public final class ArbitraryBuilding implements Building {
 
     @Override
     public String state() {
-        Map<String, String> stateMap = Map.of("maxNumberOfResources", Integer.toString(maxNumberOfResources));
+        Map<String, String> stateMap = Map.of("maxNumberOfResources",
+                Integer.toString(maxNumberOfResources));
         return new JSONObject(stateMap).toString();
     }
 }

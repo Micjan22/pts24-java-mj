@@ -1,4 +1,7 @@
+
 package sk.uniba.fmph.dcs.stone_age;
+
+import sk.uniba.fmph.dcs.game_phase_controller.GamePhase;
 
 import java.util.Collection;
 
@@ -6,7 +9,7 @@ public interface InterfaceGamePhaseController {
     boolean placeFigures(PlayerOrder player, Location location, int figuresCount);
 
     boolean makeAction(PlayerOrder player, Location location, Collection<Effect> inputResources,
-            Collection<Effect> outputResources);
+                       Collection<Effect> outputResources);
 
     boolean skipAction(PlayerOrder player, Location location);
 
@@ -21,4 +24,5 @@ public interface InterfaceGamePhaseController {
     boolean makeAllPlayersTakeARewardChoice(PlayerOrder player, Effect reward);
 
     String state();
+
 }

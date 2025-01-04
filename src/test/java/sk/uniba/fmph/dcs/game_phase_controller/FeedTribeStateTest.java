@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_phase_controller;
 
 import sk.uniba.fmph.dcs.stone_age.*;
@@ -16,7 +17,7 @@ public class FeedTribeStateTest {
         private boolean isTribeFed;
 
         FeedTribeMock(final boolean feedTribeIfEnoughFood, final boolean feedTribe, final boolean doNotFeedThisTurn,
-                final boolean isTribeFed) {
+                      final boolean isTribeFed) {
             this.feedTribeIfEnoughFood = feedTribeIfEnoughFood;
             this.feedTribe = feedTribe;
             this.doNotFeedThisTurn = doNotFeedThisTurn;

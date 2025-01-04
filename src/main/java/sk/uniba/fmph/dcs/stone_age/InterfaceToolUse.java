@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.stone_age;
 
 public interface InterfaceToolUse {
@@ -7,3 +8,4 @@ public interface InterfaceToolUse {
 
     boolean finishUsingTools();
 }
+

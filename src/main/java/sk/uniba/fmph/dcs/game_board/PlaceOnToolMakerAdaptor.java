@@ -1,14 +1,11 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
-import org.json.JSONObject;
 import sk.uniba.fmph.dcs.stone_age.ActionResult;
 import sk.uniba.fmph.dcs.stone_age.Effect;
 import sk.uniba.fmph.dcs.stone_age.HasAction;
-import sk.uniba.fmph.dcs.stone_age.PlayerOrder;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public final class PlaceOnToolMakerAdaptor implements InterfaceFigureLocationInternal {
     private final ToolMakerHutFields toolMaker;
@@ -35,7 +32,7 @@ public final class PlaceOnToolMakerAdaptor implements InterfaceFigureLocationInt
 
     @Override
     public ActionResult makeAction(final Player player, final Collection<Effect> inputResources,
-            final Collection<Effect> outputResources) {
+                                   final Collection<Effect> outputResources) {
         if (tryToMakeAction(player).equals(HasAction.NO_ACTION_POSSIBLE) || !toolMaker.actionToolMaker(player)) {
             return ActionResult.FAILURE;
         }
@@ -44,18 +41,24 @@ public final class PlaceOnToolMakerAdaptor implements InterfaceFigureLocationInt
 
     @Override
     public boolean skipAction(final Player player) {
-        JSONObject state = new JSONObject(toolMaker.state());
-        ArrayList<PlayerOrder> toolMakerFigures = new ArrayList<>(List.of(player.playerOrder()));
-        return !state.get("toolMakerFigures").equals(toolMakerFigures.toString());
+        return toolMaker.skipActionToolMaker(player);
     }
 
     @Override
     public HasAction tryToMakeAction(final Player player) {
-        return HasAction.WAITING_FOR_PLAYER_ACTION;
+        if (toolMaker.tryToMakeActionToolMaker(player)) {
+            return HasAction.WAITING_FOR_PLAYER_ACTION;
+        }
+        return HasAction.NO_ACTION_POSSIBLE;
     }
 
     @Override
     public boolean newTurn() {
         return toolMaker.newTurn();
+    }
+
+    @Override
+    public String state() {
+        return "";
     }
 }

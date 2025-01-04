@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.game_board;
 
 import sk.uniba.fmph.dcs.stone_age.ActionResult;
@@ -17,4 +18,6 @@ public interface InterfaceFigureLocationInternal {
     HasAction tryToMakeAction(Player player);
 
     boolean newTurn();
+
+    String state();
 }

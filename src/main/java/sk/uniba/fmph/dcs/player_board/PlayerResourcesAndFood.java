@@ -1,3 +1,4 @@
+
 package sk.uniba.fmph.dcs.player_board;
 
 import org.json.JSONObject;
@@ -85,5 +86,9 @@ public final class PlayerResourcesAndFood {
 
         Map<String, Map<Effect, String>> state = Map.of("resources", jsonResources);
         return new JSONObject(state).toString();
+    }
+
+    public Map<Effect, Integer> getResources() {
+        return resources;
     }
 }

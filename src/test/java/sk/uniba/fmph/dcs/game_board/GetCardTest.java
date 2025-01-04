@@ -1,14 +1,40 @@
 package sk.uniba.fmph.dcs.game_board;
-
 import org.junit.Test;
 import sk.uniba.fmph.dcs.stone_age.*;
+
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.OptionalInt;
 import static org.junit.Assert.assertEquals;
-import java.util.List;
-import java.util.Optional;
 
 public class GetCardTest {
+
+    private class CivilisationCardDeckMock implements CivilisationCardDeckInterface {
+        private static ArrayList<Optional<CivilisationCard>> deck;
+
+        CivilisationCardDeckMock() {
+            deck = new ArrayList<>();
+            deck.add(Optional.empty());
+            deck.add(Optional.of(new CivilisationCard(null, null)));
+        }
+        @Override
+        public Optional<CivilisationCard> getTop() {
+            Optional<CivilisationCard> card =  deck.get(deck.size() - 1);
+            deck.remove(deck.size() - 1);
+            return card;
+        }
+
+        @Override
+        public Optional<CivilisationCard> peek() {
+            return Optional.empty();
+        }
+
+        @Override
+        public String state() {
+            return null;
+        }
+    }
 
     @Test
     public void testCalculation() {
@@ -64,11 +90,10 @@ public class GetCardTest {
             }
         };
 
+        CivilisationCardDeckMock civilisationCardDeckMock = new CivilisationCardDeckMock();
         Player p = new Player(null, board);
-        CivilizationCardDeck deck = new CivilizationCardDeck(List.of());
-
-        GetCard getCard = new GetCard(deck);
+        GetCard getCard = new GetCard(civilisationCardDeckMock);
         assertEquals(getCard.performEffect(p, Effect.WOOD), ActionResult.ACTION_DONE);
-
+        assertEquals(getCard.performEffect(p, Effect.WOOD), ActionResult.FAILURE);
     }
 }
