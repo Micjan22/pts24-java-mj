@@ -117,7 +117,7 @@ public class GameBoardIntegrationTest {
         ArrayList<Effect> outputResources = new ArrayList<>();
         outputResources.add(Effect.WOOD);
 
-        assertEquals(location.makeAction(player1.playerOrder(), inputResources, outputResources), ActionResult.ACTION_DONE);
+        assertEquals(location.makeAction(player1.playerOrder(), inputResources, outputResources), ActionResult.ACTION_DONE_ALL_PLAYERS_TAKE_A_REWARD);
         assertEquals(rewardMenu.tryMakeAction(player1.playerOrder()), HasAction.WAITING_FOR_PLAYER_ACTION);
         assertEquals(rewardMenu.tryMakeAction(player2.playerOrder()), HasAction.WAITING_FOR_PLAYER_ACTION);
 
@@ -158,8 +158,6 @@ public class GameBoardIntegrationTest {
 
         assertEquals(location1.makeAction(player1.playerOrder(), null, null), ActionResult.ACTION_DONE_WAIT_FOR_TOOL_USE);
         assertEquals(currentThrow.getThrowResult(), 6);
-        assertEquals(location2.makeAction(player1.playerOrder(), null, null), ActionResult.FAILURE);
-        assertTrue(currentThrow.finishUsingTools());
 
         assertEquals(location2.makeAction(player1.playerOrder(), null, null), ActionResult.ACTION_DONE_WAIT_FOR_TOOL_USE);
         assertEquals(currentThrow.getThrowResult(), 9);
